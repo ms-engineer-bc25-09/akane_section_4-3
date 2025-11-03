@@ -12,6 +12,29 @@ router.get('/', function(req, res, next) {
   }
 });
 
+// 関数を追加
+function getRectArea(width, height) {
+  if (isNaN(width) || isNaN(height)) {
+    throw '数字以外は入力できないよ!';
+  }
+  return width * height; // 面積を求める処理
+}
+
+// 新しいルートで面積を計算する例
+router.post('/calculate-area', function(req, res, next) {
+  try {
+    const width = req.body.width;
+    const height = req.body.height;
+    
+    const area = getRectArea(width, height); // 面積を計算
+    res.status(200).json({ area: area }); // 結果を返す
+  } catch (e) {
+    console.error(e); // エラーメッセージを出力
+    res.status(400).json({ error: e }); // エラーレスポンスを返す
+  }
+});
+
+
 router.post('/', function(req, res, next) {
   if (req.body.name === 'tanaka') {
     console.error('error');
