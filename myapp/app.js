@@ -13,7 +13,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+// morgan をミドルウェアとして設定＆logger 設定を'dev'から 'combined' へ変更
+app.use(logger('combined')); // ログフォーマットを指定
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
