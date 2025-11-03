@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  express:
+    build:
+      context: ./myapp
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+      - 9229:9229
+    tty: true
+    volumes:
+      - ./myapp:/usr/src/app
+      # node_modulesを名前付きボリュームに隠す
+      - debug_node_modules:/usr/src/app/node_modules
+
+volumes:
+  debug_node_modules:
